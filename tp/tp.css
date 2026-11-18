@@ -1,0 +1,192 @@
+/* Tide Pocket: the live station card, the home finder, the offline page. Prism tokens only (--fg, --line, --accent ...), so it follows the site's light and dark. */
+.tp{--tp-up:#2dd4bf;--tp-dn:#f59e0b;display:block;margin:20px 0}
+.tp-card{background:var(--fill,#12161d);border:1px solid var(--line,#232a35);border-radius:18px;padding:18px 18px 14px;overflow:hidden}
+.tp-card+.tp-card{margin-top:12px}
+.tp-eyebrow{font-size:13px;color:var(--fg-muted,#9aa4b2);margin:0 0 4px}
+.tp-big{display:flex;align-items:baseline;gap:10px;margin:0}
+.tp-big b{font:700 clamp(44px,15vw,64px)/1 var(--display,inherit);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tp-big span{font-size:18px;color:var(--fg-muted,#9aa4b2)}
+.tp-trend{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:15px;margin:2px 0 0}
+.tp-trend.up{color:var(--tp-up)}.tp-trend.dn{color:var(--tp-dn)}
+.tp-next{margin:10px 0 0;font-size:16px;line-height:1.4}
+.tp-next b{font-weight:700}
+.tp-chart{display:block;width:100%;height:auto;margin:14px 0 4px;overflow:visible}
+.tp-chart .area{fill:url(#tpg)}
+.tp-chart .line{fill:none;stroke:var(--accent,#2dd4bf);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:tp-draw .9s var(--ease-out,ease-out) forwards}
+.tp-chart .past{fill:var(--canvas,#0b0d12);opacity:.45}
+.tp-chart .now{stroke:var(--fg,#fff);stroke-width:1.5;stroke-dasharray:3 4;opacity:.7}
+.tp-chart .dot{fill:var(--fg,#fff);stroke:var(--accent,#2dd4bf);stroke-width:3}
+.tp-chart .ring{fill:none;stroke:var(--accent,#2dd4bf);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center;animation:tp-ring 2.4s ease-out 1s infinite}
+.tp-chart text{font:600 11px var(--font,inherit);fill:var(--fg-muted,#9aa4b2)}
+.tp-chart .day{fill:var(--fg-subtle,#6b7684);font-weight:500}
+@keyframes tp-draw{to{stroke-dashoffset:0}}
+@keyframes tp-ring{0%{opacity:.7;transform:scale(.6)}100%{opacity:0;transform:scale(2.4)}}
+.tp-days{list-style:none;margin:6px 0 0;padding:0}
+.tp-days h3{font-size:13px;font-weight:600;color:var(--fg-muted,#9aa4b2);margin:14px 0 4px}
+.tp-row{display:flex;align-items:center;gap:12px;min-height:48px;border-top:1px solid var(--line,#232a35);font-variant-numeric:tabular-nums}
+.tp-days h3+.tp-row{border-top:0}
+.tp-row i{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700}
+.tp-row.H i{background:color-mix(in oklab,var(--tp-up) 20%,transparent);color:var(--tp-up)}
+.tp-row.L i{background:color-mix(in oklab,var(--tp-dn) 20%,transparent);color:var(--tp-dn)}
+.tp-row span{flex:1;font-size:16px}.tp-row small{font-size:15px;color:var(--fg-muted,#9aa4b2)}
+.tp-row.past{opacity:.5}
+.tp-bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tp-btn{appearance:none;border:1px solid var(--line,#232a35);background:transparent;color:var(--fg,#fff);font:600 15px var(--font,inherit);border-radius:999px;padding:0 16px;min-height:44px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;touch-action:manipulation}
+.tp-btn:active{transform:scale(.96)}
+.tp-btn[aria-pressed=true]{border-color:var(--accent,#2dd4bf);color:var(--accent,#2dd4bf)}
+.tp-btn.pri{background:var(--accent,#2dd4bf);border-color:transparent;color:#04201c}
+.tp-foot{font-size:13px;color:var(--fg-muted,#9aa4b2);margin:12px 0 0}
+.tp-note{display:flex;gap:10px;align-items:center;font-size:14px;background:color-mix(in oklab,var(--tp-dn) 14%,transparent);border-radius:12px;padding:10px 12px;margin:0 0 12px}
+.tp-err{text-align:left}.tp-err h3{margin:0 0 6px;font-size:18px}.tp-err p{margin:0 0 12px;color:var(--fg-muted,#9aa4b2)}
+.tp-skel{display:block;border-radius:10px;background:linear-gradient(90deg,var(--fill-2,#1a2029) 25%,var(--fill-3,#222a35) 50%,var(--fill-2,#1a2029) 75%);background-size:200% 100%;animation:tp-sh 1.4s linear infinite}
+@keyframes tp-sh{to{background-position:-200% 0}}
+.tp-find{display:flex;gap:8px;margin:0 0 12px}
+.tp-find input{flex:1;min-width:0;min-height:48px;border-radius:14px;border:1px solid var(--line,#232a35);background:var(--canvas,#0b0d12);color:var(--fg,#fff);font:500 16px var(--font,inherit);padding:0 14px}
+.kbd .tp-find input:focus-visible,.kbd .tp-btn:focus-visible,.kbd .tp-list a:focus-visible{outline:2px solid var(--accent,#2dd4bf);outline-offset:2px}
+.tp-list{list-style:none;margin:0;padding:0}
+.tp-list a{display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 0;border-top:1px solid var(--line,#232a35);color:inherit;text-decoration:none}
+.tp-list li:first-child a{border-top:0}
+.tp-list a>span{flex:1;min-width:0}.tp-list b{display:block;font-weight:600;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tp-list small{display:block;font-size:14px;color:var(--fg-muted,#9aa4b2)}
+.tp-list em{font-style:normal;font-size:14px;color:var(--fg-muted,#9aa4b2);white-space:nowrap}
+.tp-h{font-size:20px;margin:0 0 4px}.tp-sub{margin:0 0 12px;color:var(--fg-muted,#9aa4b2);font-size:15px}
+.tp-hero{border-color:color-mix(in oklab,var(--accent,#2dd4bf) 45%,var(--line,#232a35));background:linear-gradient(160deg,color-mix(in oklab,var(--accent,#2dd4bf) 14%,var(--fill,#12161d)),var(--fill,#12161d) 60%)}
+.tp-install{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.tp-install p{margin:0;font-size:15px}
+@media (prefers-reduced-motion:reduce){.tp-chart .line{animation:none;stroke-dashoffset:0}.tp-chart .ring,.tp-skel{animation:none}.tp-btn:active{transform:none}}
+.tp [hidden]{display:none!important}
+button.btn.pw-save{min-height:44px!important;height:auto!important;padding:10px 16px!important;line-height:1.2}
+button.btn.pw-save{border:1px solid var(--line,#232a35)!important;border-radius:999px!important;color:var(--fg,#fff)!important;font-weight:600}
+.tp-chev{font-style:normal;font-size:24px;line-height:1;color:var(--fg-subtle,#6b7684)}
+.breadcrumbs li:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tp-alarm{display:grid;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#232a35)}.tp-alarm select{min-height:44px;border-radius:12px;border:1px solid var(--line,#232a35);background:var(--canvas,#0b0d12);color:var(--fg,#fff);font:500 16px var(--font,inherit);padding:0 12px;width:100%}.tp-alarm .field{display:grid;gap:4px;font-size:13px;color:var(--fg-muted,#9aa4b2)}
+.native h1{font-size:clamp(28px,8.4vw,40px);line-height:1.12}.tp-link,.tp-x{touch-action:manipulation}
+/* large text and narrow phones: nothing may be wider than the screen (a nowrap name or an input's intrinsic width made the page 1.7x wider at the largest system font) */
+.tp,.tp-card,.tp-list,.tp-list li,.tp-list a{min-width:0;max-width:100%}.tp-list b{white-space:normal;overflow-wrap:anywhere}.tp-list small,.tp-list em{overflow-wrap:anywhere}
+.tp input,.tp select{min-width:0;max-width:100%;box-sizing:border-box}.tp-btn{white-space:normal;text-align:center}.tp-bar{flex-wrap:wrap}
+.native body{padding-bottom:calc(96px + var(--safe-b,0px))}.native .breadcrumbs ol{flex-wrap:nowrap;min-width:0}
+/* the app's header: the search icon repeats the Find tab and the boxed theme button outshouts the content, so inside the app they go quiet; the page title that repeats the brand stays for screen readers only */
+.native #findbtn{display:none}.native #modebtn{border-color:transparent;background:transparent;box-shadow:none;color:#9aa4b2}
+.native h1:has(~ #tp-home){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tp-sky-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}.tp-sky-row span{display:grid;gap:2px;min-width:0}.tp-sky-row small{color:#9aa4b2;font-size:12px}.tp-sky-row b{font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.native .tp{margin-bottom:calc(88px + var(--safe-b,0px))}
+.native h1{font-size:clamp(20px,5.6vw,30px);line-height:1.15}.native .breadcrumbs,.native .breadcrumbs ol{max-width:100%;min-width:0;overflow:hidden}.native .breadcrumbs li:last-child{flex:1 1 0;text-overflow:ellipsis}
+/* the app's station title row, the first-screen tide, removable saved places, chart times */
+.native .breadcrumbs{display:none}.native h1:has(~ #tp-live){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tp-head{display:flex;align-items:center;gap:6px;margin:14px 0 4px;min-width:0}.tp-back{appearance:none;border:0;background:transparent;color:var(--fg,#fff);width:44px;height:44px;border-radius:999px;display:grid;place-items:center;flex:none;margin-left:-8px}.tp-back:active{background:rgb(255 255 255/.08)}
+.tp-title{margin:0;font:italic 600 26px/1.15 var(--font-display,Georgia,serif);overflow-wrap:anywhere}.tp-subt{margin:2px 0 0;color:var(--fg-muted,#9aa4b2);font-size:14px;overflow-wrap:anywhere}
+.tp-now{display:block;text-decoration:none;color:inherit;border-color:color-mix(in oklab,var(--accent,#2dd4bf) 40%,var(--line,#232a35))}.tp-now[hidden]{display:none}.tp-nowname{margin:2px 0 0;display:grid;gap:1px}.tp-nowname b{font-size:20px}.tp-nowname small{color:var(--fg-muted,#9aa4b2);font-size:13px}
+.tp-now .tp-big{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}.tp-now .tp-trend{font-style:normal;font-size:14px;margin-left:8px}
+.tp-rmrow{display:flex;align-items:center;gap:4px}.tp-rmrow>a{flex:1;min-width:0}.tp-rm{appearance:none;border:0;background:transparent;color:var(--fg-muted,#9aa4b2);width:44px;height:44px;font:300 26px/1 system-ui;border-radius:999px;flex:none}.tp-rm:active{background:rgb(255 255 255/.08)}
+.tp-chart .tm{font-size:10px;fill:var(--fg-muted,#9aa4b2)}.tp-chart .nowl{font-size:10px;font-weight:700;fill:var(--accent,#2dd4bf)}
+.kbd button:focus-visible,.kbd a:focus-visible{outline:2px solid rgb(232 237 245/.6);outline-offset:3px;border-radius:999px}html:not(.kbd) :focus-visible{outline:none}
+.native .phead{padding-top:0;padding-bottom:0;min-height:0}.native .phead+*{margin-top:0}
+.tp-headsave{margin:0 0 0 auto;flex:none}
+
+/* round 2: home hierarchy, saved state, chart labels */
+button.btn.pw-save[aria-pressed=true]{background:color-mix(in oklab,var(--accent,#2dd4bf) 18%,transparent)!important;border-color:var(--accent,#2dd4bf)!important;color:var(--accent,#2dd4bf)!important}
+button.btn.pw-save[aria-pressed=true]::before{content:"";display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:-2px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.tp-sec{font:600 13px var(--font,inherit);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-muted,#9aa4b2);margin:22px 4px 8px}
+.tp-chips{display:flex;gap:8px;overflow-x:auto;margin:14px -18px 0;padding:0 18px 4px;scrollbar-width:none}.tp-chips::-webkit-scrollbar{display:none}
+.tp-chip{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line,#232a35);color:var(--fg,#fff);text-decoration:none;font:600 15px var(--font,inherit);white-space:nowrap}
+.tp-search{position:relative;margin:18px 0 0}.tp-search input{width:100%;min-height:52px;border-radius:16px;border:1px solid var(--line,#232a35);background:var(--fill,#12161d);color:var(--fg,#fff);font:500 16px var(--font,inherit);padding:0 16px 0 46px}
+.tp-search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--fg-muted,#9aa4b2);pointer-events:none}
+.tp-ask h2{font:italic 600 28px/1.15 var(--font-display,Georgia,serif);margin:0 0 6px}.tp-ask p{margin:0;color:var(--fg-muted,#9aa4b2);font-size:16px;line-height:1.45}
+.tp-ask .tp-btn.pri{min-height:52px;margin-top:16px;width:100%;justify-content:center;font-size:17px}
+.tp-quiet{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 4px 0;color:var(--fg-muted,#9aa4b2);font-size:14px}.tp-quiet .tp-btn{min-height:44px;font-size:14px}
+.tp-chart .lh{font-size:11px;font-weight:700;fill:var(--fg,#fff)}.tp-chart .lt{font-size:10px;fill:var(--fg-muted,#9aa4b2)}
+.tp-win{display:grid;gap:8px;margin-top:12px}.tp-win p{margin:0;display:flex;gap:10px;align-items:baseline;font-size:15px;line-height:1.35}.tp-win b{flex:none;min-width:76px}.tp-win span{color:var(--fg-muted,#9aa4b2)}
+.tp-chart .dl{stroke:var(--line,#232a35);stroke-width:1}.tp-chart .day{font-size:11px}
+.tp-search{display:block}.tp-sec{font-style:normal;font-family:var(--font,inherit)}
+.tp-sky-row{align-items:start}.tp-search{margin-bottom:6px}
+.tp-win .tp-wh{margin:6px 0 0;font:600 14px var(--font,inherit)}.tp-win b{min-width:92px}
+.tp-btn{border-color:color-mix(in oklab,var(--fg,#fff) 28%,transparent)}.tp-btn svg{flex:none}
+.tp-chip{border-color:color-mix(in oklab,var(--accent,#2dd4bf) 45%,var(--line,#232a35))}
+.tp-days h3{margin-top:18px}.tp-eyebrow+.tp-days{margin-top:10px}
+.native .tp-head{margin:0 0 6px}.tp-title{font-size:24px}
+.tp-quiet .tp-btn{white-space:nowrap}
+.tp-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.tp-wd{display:grid;gap:3px;justify-items:center;min-width:0}.tp-wd small{font-size:11px;color:var(--fg-muted,#9aa4b2)}.tp-wd b{font-size:12px;font-variant-numeric:tabular-nums}
+.tp-wb{position:relative;width:14px;height:84px;border-radius:7px;background:color-mix(in oklab,var(--fg,#fff) 8%,transparent)}.tp-wb i{position:absolute;left:0;right:0;border-radius:7px;background:color-mix(in oklab,var(--accent,#2dd4bf) 55%,transparent)}.tp-wb i.big{background:var(--accent,#2dd4bf)}
+.tp-wh select{min-height:44px;margin:0 6px;border-radius:12px;border:1px solid var(--line,#232a35);background:var(--canvas,#0b0d12);color:var(--fg,#fff);font:600 15px var(--font,inherit);padding:0 10px}
+.tp-gt{margin:12px 0}.tp-gt:empty{display:none}.tp-gt .tp-card{margin:0}
+.tp-nowname{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.tp-nowname small{font-size:15px}
+.tp-hero>.tp-big,.tp-hero>.tp-trend{display:inline-flex;vertical-align:baseline}.tp-hero>.tp-trend{margin-left:14px}
+.tp-spark{display:block;width:100%;height:44px;margin-top:12px;opacity:.9}
+.tp-quiet{flex-wrap:wrap}.native #tp-home~p{display:none}
+.tp-chart .tk{stroke:var(--fg-muted,#9aa4b2);stroke-width:1;opacity:.6}.tp-chart .tkl{font-size:9px;fill:var(--fg-subtle,#6b7684)}
+/* round 6: Good times rows and pills */
+.tp-win{gap:0}.tp-win .tp-wh{margin:16px 0 6px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent,#2dd4bf)}
+.tp-win .tp-gr{display:grid;grid-template-columns:86px 1fr auto;align-items:center;gap:8px;min-height:40px;border-top:1px solid var(--line,#232a35);margin:0;padding:6px 0}.tp-win .tp-gr:first-of-type{border-top:0}
+.tp-win .tp-gr b{min-width:0;font-weight:600}.tp-win .tp-gr span{color:var(--fg,#fff);font-variant-numeric:tabular-nums}
+.tp-pill{font-style:normal;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:color-mix(in oklab,var(--accent,#2dd4bf) 16%,transparent);color:var(--accent,#2dd4bf);white-space:nowrap}.tp-pill.big{margin-left:8px;text-transform:none;letter-spacing:0}
+.tp-cap{margin:12px 0 0;font-size:12px;line-height:1.4;color:var(--fg-subtle,#6b7684)}
+.tp-win .tp-wh select{text-transform:none;letter-spacing:0}
+.tp-win .tp-cap,.tp .tp-cap{font-size:12px;line-height:1.4;display:block}
+/* round 7: next tide leads, the level now is a quiet row; alarm panel in two columns; sign-in row full width */
+.tp-now-row{margin:10px 0 0;font-size:15px;color:var(--fg-muted,#9aa4b2);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.tp-now-row b{color:var(--fg,#fff);font-weight:600}.tp-now-row .tp-trend{display:inline;font-style:normal;margin:0;font-size:15px}
+.tp-hero>.tp-big,.tp-hero>.tp-trend{display:flex}.tp-hero>.tp-trend{margin-left:0}
+.tp-alarm{grid-template-columns:1fr 1fr;align-items:end}.tp-alarm .tp-bar,.tp-alarm .tp-foot{grid-column:1/-1}.tp-alarm .tp-bar .tp-btn.pri{flex:1;justify-content:center;min-height:48px}
+#tpAccount{flex-direction:column;align-items:stretch;text-align:center}#tpAccount .tp-btn{width:100%;justify-content:center}
+/* round 8 */
+.tp-lv{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-size:15px;color:var(--fg-muted,#9aa4b2)}.tp-lv select{min-height:44px;border-radius:12px;border:1px solid var(--line,#232a35);background:var(--canvas,#0b0d12);color:var(--fg,#fff);font:600 15px var(--font,inherit);padding:0 10px}
+.tp-chips{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.tp-alarm select{text-overflow:ellipsis}
+/* round 9: night shading, scrub */
+.tp-chart .night{fill:#000;opacity:.22}.tp-chart{touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.tp-chart .scrub line{stroke:var(--fg,#fff);stroke-width:1;opacity:.8}.tp-chart .scrub circle{fill:var(--fg,#fff);stroke:var(--accent,#2dd4bf);stroke-width:3}
+.tp-chart .tip rect{fill:var(--fill-3,#222a35);stroke:var(--line,#232a35)}.tp-chart .tip text{fill:var(--fg,#fff);font-size:11px;font-weight:700}
+/* round 10: favorites rail, quieter sun and moon, ordered station cards */
+.tp-rail{list-style:none;display:flex;gap:10px;margin:0 -18px;padding:2px 18px 6px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.tp-rail::-webkit-scrollbar{display:none}
+.tp-fav{position:relative;flex:0 0 164px;scroll-snap-align:start;background:var(--fill,#12161d);border:1px solid var(--line,#232a35);border-radius:18px}
+.tp-fav>a{display:grid;gap:2px;padding:14px 14px 12px;color:inherit;text-decoration:none;min-height:124px;align-content:start}.tp-fav small{font-size:12px;color:var(--fg-muted,#9aa4b2)}.tp-fav b{font-size:16px;line-height:1.2;padding-right:30px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tp-favh{font:700 26px/1.2 var(--display,inherit);margin-top:6px;font-variant-numeric:tabular-nums}.tp-favh .tp-trend{font-size:13px;display:inline}.tp-fav em{font-style:normal;font-size:13px;color:var(--fg-muted,#9aa4b2)}
+.tp-fav .tp-rm{position:absolute;top:2px;right:2px;width:44px;height:44px;font-size:22px}
+.tp-sky.tp-card{padding:12px 16px}.tp-sky .tp-eyebrow{display:none}.tp-sky-row{margin-top:0}
+.tp-fav .tp-bell{position:absolute;right:2px;bottom:2px;width:44px;height:44px;border:0;background:transparent;color:var(--fg-muted,#9aa4b2);display:grid;place-items:center;border-radius:999px}.tp-fav .tp-bell[aria-pressed=true]{color:var(--accent,#2dd4bf)}
+.tp-add{display:grid}.tp-add button{appearance:none;border:1px dashed color-mix(in oklab,var(--fg,#fff) 25%,transparent);border-radius:18px;background:transparent;color:var(--fg-muted,#9aa4b2);font:600 15px var(--font,inherit);min-height:124px;padding:0 12px;width:100%}
+.tp-fav.tp-add{border:0;background:none}
+#tpSaved{overflow:hidden;max-width:100%}.tp-rail{margin:0;padding:2px 0 6px}
+/* #tp-home and #tp-live sit inside a flex header: without this they shrink to their content (the home was 20px narrower than the screen when its content was short) */
+#tp-home,#tp-live{flex:1 1 100%;width:100%;box-sizing:border-box}
+/* round 13: bigger full-bleed chart, taller home curve, cards rise in once */
+.tp-hero .tp-chart{margin:16px -18px 6px;width:calc(100% + 36px);max-width:none}
+.tp-spark{height:70px;margin-top:14px}
+@keyframes tp-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tp-in .tp-card,.tp-in .tp-fav,.tp-in .tp-search{animation:tp-rise .45s var(--ease-out,ease-out) both}
+.tp-in>:nth-child(2) .tp-card,.tp-in>:nth-child(2){animation-delay:.05s}.tp-in>:nth-child(3){animation-delay:.1s}.tp-in>:nth-child(4){animation-delay:.15s}.tp-in>:nth-child(5){animation-delay:.2s}.tp-in>:nth-child(6){animation-delay:.25s}
+@media (prefers-reduced-motion:reduce){.tp-in .tp-card,.tp-in .tp-fav,.tp-in .tp-search{animation:none}}
+/* round 14: a station screen that shows the chart sooner */
+#tp-live .tp-big b{font-size:clamp(40px,12vw,54px)}#tp-live .tp-hero .tp-big{margin-top:2px}
+.native .tp-title{font-size:22px;line-height:1.12}.native .tp-head{margin-bottom:0}.native .tp-subt{margin-top:0}
+.tp-list .st-inline b{display:inline;margin-right:8px}.tp-list .st-inline small{display:inline}
+.tp-list a{min-height:52px}
+.tp-chart .night{opacity:.3}
+.tp .tp-list a{min-height:56px!important;box-sizing:border-box}
+.tp-list .tp-mini{flex:none;width:64px;height:24px;opacity:.9}.tp-big b{font-variant-numeric:tabular-nums}
+/* round 16: elevated cards only for the hero and the chart; the sections below sit on the page with a hairline; no dead gap above the state list */
+#tp-live .tp-card:not(.tp-hero){background:none;border:0;border-top:1px solid var(--line,#232a35);border-radius:0;padding:22px 2px 8px;margin-top:6px}
+#tp-live .tp-gt{margin:6px 0 0}#tp-live .tp-gt .tp-card{margin:0}
+#tpNear .tp-card{background:none;border:0;border-radius:0;padding:0}
+.native #tp-home{margin-bottom:8px}.native #tp-live{margin-bottom:8px}
+
+/* round 17: king tide strip, sticky blurred title row with the live level */
+.tp-king{margin:6px 0 0;font-size:14px;color:var(--fg-muted,#9aa4b2)}.tp-king[hidden]{display:none}.tp-pill.king{background:linear-gradient(90deg,#f59e0b,#fb7185);color:#1a1205;font-style:normal;font-weight:700}
+.native .tp-head{position:sticky;top:0;z-index:20;padding:6px 16px;margin-left:-16px;margin-right:-16px;background:var(--hbg,#0b1114);box-shadow:0 0 0 100vmax var(--hbg,#0b1114);clip-path:inset(0 -100vmax)}
+.tp-hl{margin-left:auto;display:none;flex-direction:column;align-items:flex-end;font-size:12px;color:var(--fg-muted,#9aa4b2);line-height:1.15}.tp-hl b{color:var(--fg,#fff);font-size:17px}.tp-head.scrolled .tp-hl{display:flex}.tp-hl+.tp-headsave{margin-left:10px}
+.native .tp-head.scrolled .tp-title{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.native .tp-head.scrolled .tp-subt{display:none}.native .tp-head.scrolled{padding-top:2px;padding-bottom:2px}
+.tp-hl{white-space:nowrap;flex:none}.tp-hl b{font-size:16px}
+
+/* round 18: water movement meter */
+.tp-flow{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;margin:12px 0 0}.tp-flow-t small{display:block;color:var(--fg-muted,#9aa4b2);font-size:12px;letter-spacing:.04em;text-transform:uppercase}.tp-flow-t b{font-size:17px}.tp-flow-n{font-size:13px;color:var(--fg-muted,#9aa4b2);text-align:right}
+.tp-flow-bar{grid-column:1/-1;order:3;height:8px;border-radius:99px;background:color-mix(in oklab,var(--fg,#fff) 12%,transparent);overflow:hidden}.tp-flow-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#2dd4bf,#38bdf8)}
+
+/* round 19: minus tide, markers on the week bars */
+.tp-king p{margin:6px 0 0}.tp-pill.minus{background:linear-gradient(90deg,#38bdf8,#818cf8);color:#06121f;font-style:normal;font-weight:700}
+.tp-wb{position:relative}.tp-wm{position:absolute;top:-14px;left:50%;transform:translateX(-50%);text-decoration:none;font-size:10px;line-height:1}.tp-wm.king{color:#f59e0b}.tp-wm.minus{color:#38bdf8}
+.tp-head{background-clip:padding-box}
+.tp-wd .tp-wb{margin-top:12px}.tp-wm{top:-12px}
+
+/* round 20: conditions card, king strip wraps cleanly */
+.tp-obs-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px}.tp-obs-row span{display:flex;flex-direction:column;gap:2px}.tp-obs-row small{color:var(--fg-muted,#b4bcc8);font-size:12px;letter-spacing:.04em;text-transform:uppercase}.tp-obs-row b{font-size:20px}.tp-obs-row em{font-style:normal;font-size:12px;color:var(--fg-muted,#b4bcc8)}
+.tp-king p{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.tp-eyebrow,.tp-cap,.tp-foot{color:var(--fg-muted,#b4bcc8)}
